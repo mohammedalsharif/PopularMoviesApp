@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tv_movie_item_bgColor">#6C5B59</color>
+    <color name="light_white">#BCB1B0</color>
+    <color name="red">#F44336</color>
+    <color name="color_maim_bg">#191919</color>
 </resources>

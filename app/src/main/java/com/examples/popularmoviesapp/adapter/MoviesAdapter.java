@@ -1,5 +1,6 @@
 package com.examples.popularmoviesapp.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,20 @@ import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovies> {
     List<Movie> movies = new ArrayList<>();
-
-    public MoviesAdapter(List<Movie> movies) {
+    MoviesListener listener;
+    Context context;
+    public MoviesAdapter(List<Movie> movies,Context context,MoviesListener listener) {
         this.movies = movies;
+        this.listener=listener;
+        this.context=context;
     }
 
     @NonNull
     @Override
     public HolderMovies onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CustomeItemRecMoviesBinding binding;
-        binding = CustomeItemRecMoviesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        binding = CustomeItemRecMoviesBinding.inflate(LayoutInflater.from(context), parent, false);
         return new HolderMovies(binding);
     }
 
@@ -33,6 +38,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
         Movie movie = movies.get(position);
         holder.binding.imMovie.setImageResource(movie.getImage());
         holder.binding.tvNameMovieItem.setText(movie.getMovieName());
+        listener.OnClickItemRec(position);
 
     }
 
