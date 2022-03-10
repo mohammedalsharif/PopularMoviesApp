@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort_black_24dp"
+        android:iconTint="@color/white"
+        android:title="@string/action_sort"
+        app:showAsAction="always">
+        <menu>
+            <group
+                android:id="@+id/menu_sort_group"
+                android:checkableBehavior="none">
+                <item
+                    android:id="@+id/popular_item"
+                    android:checked="true"
+                    android:title="@string/action_popular" />
+                <item
+                    android:id="@+id/top_rated_action"
+                    android:title="@string/action_top_rated"
+                    />
+                <item
+                    android:id="@+id/now_playing_action"
+                    android:title="@string/action_now_playing" />
+
+            </group>
+        </menu>
+    </item>
+</menu>
