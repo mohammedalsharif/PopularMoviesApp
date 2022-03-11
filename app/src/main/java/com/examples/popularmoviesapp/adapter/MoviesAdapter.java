@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.examples.popularmoviesapp.databinding.CustomeItemRecMoviesBinding;
 import com.examples.popularmoviesapp.model.Movie;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +19,15 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovies> {
     List<Movie> movies = new ArrayList<>();
     MoviesListener listener;
-    Context context;
-    public MoviesAdapter(List<Movie> movies,Context context,MoviesListener listener) {
+    //Context context;
+    public MoviesAdapter(List<Movie> movies,MoviesListener listener) {
         this.movies = movies;
         this.listener=listener;
-        this.context=context;
+      //  this.context=context;
+    }
+    public void setMovies(List<Movie> movieArrayList){
+        this.movies = movieArrayList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -29,15 +35,28 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     public HolderMovies onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CustomeItemRecMoviesBinding binding;
 
-        binding = CustomeItemRecMoviesBinding.inflate(LayoutInflater.from(context), parent, false);
+        binding = CustomeItemRecMoviesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new HolderMovies(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HolderMovies holder, int position) {
         Movie movie = movies.get(position);
-        holder.binding.imMovie.setImageResource(movie.getImage());
-        holder.binding.tvNameMovieItem.setText(movie.getMovieName());
+      //  holder.binding.imMovie.setImageResource(movie.getImage());
+        holder.binding.tvNameMovieItem.setText(movie.getTitle());
+        Picasso.get().load("https://image.tmdb.org/t/p/w500"+movie.getPosterPath()).fit()
+                .into(holder.binding.imMovie, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
         listener.OnClickItemRec(position);
 
     }

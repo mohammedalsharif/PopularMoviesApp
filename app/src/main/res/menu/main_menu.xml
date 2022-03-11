@@ -12,7 +12,7 @@
                 android:id="@+id/menu_sort_group"
                 android:checkableBehavior="none">
                 <item
-                    android:id="@+id/popular_item"
+                    android:id="@+id/popular_action"
                     android:checked="true"
                     android:title="@string/action_popular" />
                 <item

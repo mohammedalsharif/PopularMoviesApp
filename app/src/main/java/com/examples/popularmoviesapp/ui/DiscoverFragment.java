@@ -2,18 +2,26 @@ package com.examples.popularmoviesapp.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.adapter.MoviesAdapter;
 import com.examples.popularmoviesapp.adapter.MoviesListener;
 import com.examples.popularmoviesapp.databinding.FragmentDiscoverBinding;
 import com.examples.popularmoviesapp.model.Movie;
+import com.examples.popularmoviesapp.model.MovieResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +32,13 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class DiscoverFragment extends Fragment {
+    MovieViewModel viewModel ;
+    static MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(),new MoviesListener() {
+        @Override
+        public void OnClickItemRec(int position) {
 
+        }
+    });
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,6 +72,7 @@ public class DiscoverFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -69,41 +84,64 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentDiscoverBinding binding = FragmentDiscoverBinding.inflate(getLayoutInflater());
-        List<Movie> movies = getMovieData();
-        MoviesAdapter adapter = new MoviesAdapter(movies, getActivity(),new MoviesListener() {
-            @Override
-            public void OnClickItemRec(int position) {
+        viewModel= new ViewModelProvider(this).get(MovieViewModel.class);
 
+        viewModel.getPopularMovies();
+        viewModel.mutableLiveData.observe(getActivity(), new Observer<MovieResponse>() {
+            @Override
+            public void onChanged(MovieResponse movieResponse) {
+                adapter.setMovies(movieResponse.getMovieList());
             }
         });
+
+
         binding.recyclerViewDiscover.setAdapter(adapter);
         binding.recyclerViewDiscover.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         binding.recyclerViewDiscover.setHasFixedSize(true);
+
         return binding.getRoot();
     }
 
-    //        iniRec();
-//    private void iniRec() {
-//
-//
-//    }
-    private List<Movie> getMovieData() {
-        List<Movie> moviesList = new ArrayList<>();
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
-        moviesList.add(new Movie(R.drawable.film, "Movie Name"));
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
-        return moviesList;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.popular_action:
+                viewModel.getPopularMovies();
+                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                    @Override
+                    public void onChanged(MovieResponse movieResponse) {
+                        adapter.setMovies(movieResponse.getMovieList());
+                    }
+                });
+                return true;
+            case R.id.top_rated_action:
+                viewModel.getTopRatedMovies();
+                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                    @Override
+                    public void onChanged(MovieResponse movieResponse) {
+                        adapter.setMovies(movieResponse.getMovieList());
+                    }
+                });
+                return true;
+            case R.id.now_playing_action:
+                viewModel.getNowPlayingMovies();
+                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                    @Override
+                    public void onChanged(MovieResponse movieResponse) {
+                        adapter.setMovies(movieResponse.getMovieList());
+                    }
+                });
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
