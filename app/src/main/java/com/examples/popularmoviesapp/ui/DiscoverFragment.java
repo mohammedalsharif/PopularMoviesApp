@@ -32,8 +32,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class DiscoverFragment extends Fragment {
-    MovieViewModel viewModel ;
-    static MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(),new MoviesListener() {
+    MovieViewModel viewModel;
+    static MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(), new MoviesListener() {
         @Override
         public void OnClickItemRec(int position) {
 
@@ -84,10 +84,10 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentDiscoverBinding binding = FragmentDiscoverBinding.inflate(getLayoutInflater());
-        viewModel= new ViewModelProvider(this).get(MovieViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
 
-        viewModel.getPopularMovies();
-        viewModel.mutableLiveData.observe(getActivity(), new Observer<MovieResponse>() {
+
+        viewModel.getPopularMovies().observe(getActivity(), new Observer<MovieResponse>() {
             @Override
             public void onChanged(MovieResponse movieResponse) {
                 adapter.setMovies(movieResponse.getMovieList());
@@ -104,17 +104,16 @@ public class DiscoverFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.popular_action:
-                viewModel.getPopularMovies();
-                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                viewModel.getPopularMovies().observe(this, new Observer<MovieResponse>() {
                     @Override
                     public void onChanged(MovieResponse movieResponse) {
                         adapter.setMovies(movieResponse.getMovieList());
@@ -122,8 +121,7 @@ public class DiscoverFragment extends Fragment {
                 });
                 return true;
             case R.id.top_rated_action:
-                viewModel.getTopRatedMovies();
-                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                viewModel.getTopRatedMovies().observe(this, new Observer<MovieResponse>() {
                     @Override
                     public void onChanged(MovieResponse movieResponse) {
                         adapter.setMovies(movieResponse.getMovieList());
@@ -131,8 +129,7 @@ public class DiscoverFragment extends Fragment {
                 });
                 return true;
             case R.id.now_playing_action:
-                viewModel.getNowPlayingMovies();
-                viewModel.mutableLiveData.observe(this, new Observer<MovieResponse>() {
+                viewModel.getNowPlayingMovies().observe(this, new Observer<MovieResponse>() {
                     @Override
                     public void onChanged(MovieResponse movieResponse) {
                         adapter.setMovies(movieResponse.getMovieList());

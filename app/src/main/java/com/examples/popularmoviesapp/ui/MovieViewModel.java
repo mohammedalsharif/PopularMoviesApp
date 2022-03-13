@@ -2,6 +2,7 @@ package com.examples.popularmoviesapp.ui;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -21,7 +22,7 @@ public class MovieViewModel extends ViewModel {
     public static final String apiKey = "ecf90d6c2b60085eb2de8f0495ebffbb";
 
 
-    public void getPopularMovies() {
+    public LiveData<MovieResponse> getPopularMovies() {
          apiClint.getPopularMovies(apiKey).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -34,8 +35,10 @@ public class MovieViewModel extends ViewModel {
                 Log.e("MovieViewModel", t.getMessage());
             }
         });
+
+       return  mutableLiveData;
     }
-    public void getTopRatedMovies(){
+    public LiveData<MovieResponse> getTopRatedMovies(){
         apiClint.getTopRatedMovies(apiKey).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -47,8 +50,9 @@ public class MovieViewModel extends ViewModel {
 
             }
         });
+        return mutableLiveData;
     }
-    public void getNowPlayingMovies(){
+    public LiveData<MovieResponse> getNowPlayingMovies(){
         apiClint.getNowPlaying(apiKey).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
@@ -61,6 +65,21 @@ public class MovieViewModel extends ViewModel {
 
             }
         });
+        return mutableLiveData;
+    }
+    public LiveData<MovieResponse> getSearchMovieList(){
+        apiClint.getSearchMovieList(apiKey,"Jack Reacher","1").enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                mutableLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+
+            }
+        });
+        return mutableLiveData;
     }
 
 }

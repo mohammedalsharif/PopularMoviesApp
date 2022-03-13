@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     MovieViewModel mViewModel ;
     DiscoverFragment discoverFragment = new DiscoverFragment();
     FavoritesFragment favoritesFragment =new FavoritesFragment();
+    SearchFragment searchFragment =new SearchFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.favorites_item:
                         ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(),favoritesFragment,R.id.main_container);
+                        return true;
+                    case R.id.search_item:
+                        ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(),searchFragment,R.id.main_container);
                         return true;
                 }
                 return false;

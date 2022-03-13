@@ -1,5 +1,6 @@
 package com.examples.popularmoviesapp.data.api;
 
+import com.examples.popularmoviesapp.Utils.AppExecutor;
 import com.examples.popularmoviesapp.model.MovieResponse;
 
 import retrofit2.Call;
@@ -9,7 +10,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public class ApiClint {
-    private static final String baseUrl = "https://api.themoviedb.org/3/movie/";
+   // private static final String baseUrl = "https://api.themoviedb.org/3/movie/";
+    private static final String baseUrl = "https://api.themoviedb.org/3/";
 
     private GetDataInterface dataInterface;
 
@@ -30,10 +32,10 @@ public class ApiClint {
     }
 
     public Call<MovieResponse> getPopularMovies(String apiKey) {
-       return dataInterface.getPopularMovies(apiKey);
+        return dataInterface.getPopularMovies(apiKey);
     }
 
-   public Call<MovieResponse> getTopRatedMovies(String apiKey) {
+    public Call<MovieResponse> getTopRatedMovies(String apiKey) {
         return dataInterface.getTopRatedMovies(apiKey);
     }
 
@@ -41,5 +43,10 @@ public class ApiClint {
     public Call<MovieResponse> getNowPlaying(String apiKey) {
         return dataInterface.getNowPlaying(apiKey);
     }
+
+    public Call<MovieResponse> getSearchMovieList(String apiKey, String query, String page) {
+        return dataInterface.getSearchMovieList(apiKey,query,page);
+    }
+
 
 }
