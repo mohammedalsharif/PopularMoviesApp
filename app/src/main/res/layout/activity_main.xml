@@ -11,7 +11,7 @@
         android:id="@+id/main_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-       android:layout_above="@id/bottomNavigationView"
+        android:layout_above="@id/bottomNavigationView"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"

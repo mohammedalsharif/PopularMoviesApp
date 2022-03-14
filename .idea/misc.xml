@@ -9,11 +9,12 @@
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.151" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/drawable/ic_sort_black_24dp.xml" value="0.151" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/drawable/ic_whatshot_black_24dp.xml" value="0.151" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/drawable/popularity_shape.xml" value="0.17" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/drawable/round_corner.xml" value="0.151" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/custom_item_search_rec.xml" value="0.176" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/custom_item_search_rec.xml" value="0.152" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/custome_item_rec_movies.xml" value="0.136" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/fragment_discover.xml" value="0.21302083333333333" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/fragment_discover.xml" value="0.2" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/layout/fragment_favortis.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/menu/items_menu_btom_navi.xml" value="0.21302083333333333" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/PopularMoviesApp/app/src/main/res/menu/main_menu.xml" value="0.21302083333333333" />

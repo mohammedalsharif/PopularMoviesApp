@@ -139,7 +139,7 @@ public class Movie {
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+      return   releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {

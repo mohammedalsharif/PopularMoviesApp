@@ -3,8 +3,8 @@
     <item android:color="#241964"
         android:state_pressed="true" />
 
-    <item android:color="#4292b7"
+    <item android:color="#53B9E8"
         android:state_checked="true" />
 
-    <item android:color="@color/light_white" />
+    <item android:color="#FDFCFC" />
 </selector>

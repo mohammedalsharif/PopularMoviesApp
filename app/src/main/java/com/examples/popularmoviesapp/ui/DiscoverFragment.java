@@ -85,6 +85,7 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentDiscoverBinding binding = FragmentDiscoverBinding.inflate(getLayoutInflater());
+        binding.spinKit.setVisibility(View.VISIBLE);
         viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
 
 
@@ -92,6 +93,7 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onChanged(MovieResponse movieResponse) {
                 adapter.setMovies(movieResponse.getMovieList());
+                binding.spinKit.setVisibility(View.GONE);
             }
         });
 

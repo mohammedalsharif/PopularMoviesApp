@@ -21,6 +21,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     List<Movie> movies = new ArrayList<>();
     MoviesListener listener;
     //Context context;
+
     public MoviesAdapter(List<Movie> movies,MoviesListener listener) {
         this.movies = movies;
         this.listener=listener;
@@ -35,8 +36,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     @NonNull
     @Override
     public HolderMovies onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-
         CustomItemSearchRecBinding binding =   CustomItemSearchRecBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new HolderMovies(binding);
     }
@@ -46,6 +45,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
         Movie movie = movies.get(position);
       //  holder.binding.imMovie.setImageResource(movie.getImage());
        holder.binding.tvNameMovieItem.setText(movie.getTitle());
+       holder.binding.tvReleaseDate.setText(movie.getReleaseDate());
+       holder.binding.tvPop.setText(String.valueOf(movie.getVoteAverage()));
+       holder.binding.progressBar.setProgress((int)(movie.getVoteAverage()*10));
+       //holder.binding.tvOverview.setText(movie.getOverview());
+        holder.binding.ratingBar.setRating((float) (movie.getVoteAverage()/2));
         Picasso.get().load(movie.getPosterPath()).fit()
                 .into(holder.binding.imMovie, new Callback() {
                     @Override
