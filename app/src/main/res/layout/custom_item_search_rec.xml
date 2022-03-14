@@ -13,9 +13,40 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#211264"
+        android:backgroundTint="@color/color_item_serch_bg"
+        android:elevation="8dp"
         app:cardCornerRadius="5dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="@string/action_now_playing"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_nameMovie_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="8dp"
+               android:layout_marginTop="16dp"
+                android:text="@string/action_now_playing"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -25,6 +56,7 @@
         android:layout_marginBottom="10dp"
         android:clickable="true"
         android:focusable="true"
+        android:elevation="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="8dp"
         tools:layout_width="160dp">
@@ -33,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/black">
+
 
             <ImageView
                 android:id="@+id/im_Movie"

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -94,9 +95,9 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
-
+       // new GridLayoutManager(getActivity(), 2)
         binding.recyclerViewDiscover.setAdapter(adapter);
-        binding.recyclerViewDiscover.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        binding.recyclerViewDiscover.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerViewDiscover.setHasFixedSize(true);
 
         return binding.getRoot();

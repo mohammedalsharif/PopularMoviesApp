@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.examples.popularmoviesapp.databinding.CustomItemSearchRecBinding;
 import com.examples.popularmoviesapp.databinding.CustomeItemRecMoviesBinding;
 import com.examples.popularmoviesapp.model.Movie;
 import com.squareup.picasso.Callback;
@@ -24,6 +25,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
         this.movies = movies;
         this.listener=listener;
       //  this.context=context;
+
     }
     public void setMovies(List<Movie> movieArrayList){
         this.movies = movieArrayList;
@@ -33,9 +35,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     @NonNull
     @Override
     public HolderMovies onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CustomeItemRecMoviesBinding binding;
 
-        binding = CustomeItemRecMoviesBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        CustomItemSearchRecBinding binding =   CustomItemSearchRecBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new HolderMovies(binding);
     }
 
@@ -43,8 +45,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     public void onBindViewHolder(@NonNull HolderMovies holder, int position) {
         Movie movie = movies.get(position);
       //  holder.binding.imMovie.setImageResource(movie.getImage());
-        holder.binding.tvNameMovieItem.setText(movie.getTitle());
-        Picasso.get().load("https://image.tmdb.org/t/p/w500"+movie.getPosterPath()).fit()
+       holder.binding.tvNameMovieItem.setText(movie.getTitle());
+        Picasso.get().load(movie.getPosterPath()).fit()
                 .into(holder.binding.imMovie, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -67,9 +69,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     }
 
     public class HolderMovies extends RecyclerView.ViewHolder {
-        CustomeItemRecMoviesBinding binding;
+        CustomItemSearchRecBinding binding;
 
-        public HolderMovies(@NonNull CustomeItemRecMoviesBinding itemView) {
+        public HolderMovies(@NonNull   CustomItemSearchRecBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
         }
