@@ -1,22 +1,16 @@
 package com.examples.popularmoviesapp.data.api;
 
-import com.examples.popularmoviesapp.Utils.AppExecutor;
 import com.examples.popularmoviesapp.model.MovieResponse;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public class ApiClint {
-   // private static final String baseUrl = "https://api.themoviedb.org/3/movie/";
+    // private static final String baseUrl = "https://api.themoviedb.org/3/movie/";
     private static final String baseUrl = "https://api.themoviedb.org/3/";
-
     private GetDataInterface dataInterface;
-
     private static ApiClint INSTANCE;
-
     public ApiClint() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -44,8 +38,8 @@ public class ApiClint {
         return dataInterface.getNowPlaying(apiKey);
     }
 
-    public Call<MovieResponse> getSearchMovieList(String apiKey, String query, String page) {
-        return dataInterface.getSearchMovieList(apiKey,query,page);
+    public Call<MovieResponse> getSearchMovieList(String apiKey, String query, int page) {
+        return dataInterface.getSearchMovieList(apiKey, query, page);
     }
 
 

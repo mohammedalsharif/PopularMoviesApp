@@ -9,8 +9,5 @@
         android:id="@+id/favorites_item"
         android:icon="@drawable/ic_favorite_black_24dp"
         android:title="@string/favorite" />
-    <item
-        android:id="@+id/search_item"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search" />
+
 </menu>

@@ -1,4 +1,4 @@
-package com.examples.popularmoviesapp.adapter;
+package com.examples.popularmoviesapp.adapters;
 
 public interface MoviesListener {
     void OnClickItemRec(int position);

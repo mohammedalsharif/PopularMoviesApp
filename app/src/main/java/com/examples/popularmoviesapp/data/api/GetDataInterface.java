@@ -21,9 +21,9 @@ public interface GetDataInterface {
     @GET("search/movie")
     Call<MovieResponse> getSearchMovieList( @Query("api_key") String apiKey
             ,@Query("query") String query ,
-             @Query("page") String page);
+             @Query("page") int page);
 
     @GET("movie/{movie_id}?")
-    Call<MovieResponse> getSearchById(@Path("movie_id") int movieId);
+    Call<MovieResponse> getSearchById(@Path("movie_id") int movieId,@Query("api_key") String apiKey);
 
 }
