@@ -61,7 +61,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
                         holder.binding.spinKitItem.setVisibility(View.VISIBLE);
                     }
                 });
-        listener.OnClickItemRec(position);
+
 
     }
 
@@ -75,12 +75,26 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
 
     }
 
+    public Movie getItem(int position) {
+        return movies.get(position);
+
+    }
+
+
     public class HolderMovies extends RecyclerView.ViewHolder {
         CustomItemSearchRecBinding binding;
 
         public HolderMovies(@NonNull CustomItemSearchRecBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
+            itemView.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    listener.OnClickItemRec(getAdapterPosition());
+                }
+            });
         }
+
     }
 }

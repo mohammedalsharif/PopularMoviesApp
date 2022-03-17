@@ -11,6 +11,7 @@ import com.examples.popularmoviesapp.Utils.AppExecutor;
 import com.examples.popularmoviesapp.data.api.ApiClint;
 import com.examples.popularmoviesapp.model.Movie;
 import com.examples.popularmoviesapp.model.MovieResponse;
+import com.examples.popularmoviesapp.model.ReviewsResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +25,10 @@ import retrofit2.Response;
 
 public class MovieViewModel extends ViewModel {
 
+    public MutableLiveData<ReviewsResponse> mDataReview = new MutableLiveData<>();
     public MutableLiveData<MovieResponse> mutableLiveData = new MutableLiveData<>();
     public MutableLiveData<List<Movie>> mutableLiveMovieData = new MutableLiveData<>();
+
     ApiClint apiClint = ApiClint.getINSTANCE();
     public static final String apiKey = "ecf90d6c2b60085eb2de8f0495ebffbb";
     public RetrieveMoviesRunnable retrieveMoviesRunnable;
@@ -160,6 +163,20 @@ public class MovieViewModel extends ViewModel {
 
     public void searchNextPage() {
         getSearchMovie(mQuery, mPageNumber + 1);
+    }
+
+    public void getReviews(int id) {
+         apiClint.getReviews(id,apiKey).enqueue(new Callback<ReviewsResponse>() {
+             @Override
+             public void onResponse(Call<ReviewsResponse> call, Response<ReviewsResponse> response) {
+                 mDataReview.setValue(response.body());
+             }
+
+             @Override
+             public void onFailure(Call<ReviewsResponse> call, Throwable t) {
+                 Log.e("TAG", "onFailure: "+t.getMessage() );
+             }
+         });
     }
 
 }

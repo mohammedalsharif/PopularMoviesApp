@@ -3,9 +3,10 @@ package com.examples.popularmoviesapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
 
     @SerializedName("adult")
     @Expose
@@ -75,7 +76,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return "https://image.tmdb.org/t/p/w500"+backdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {
@@ -99,7 +100,7 @@ public class Movie {
     }
 
     public String getOriginalLanguage() {
-        return "Language : "+originalLanguage;
+        return originalLanguage;
     }
 
     public void setOriginalLanguage(String originalLanguage) {

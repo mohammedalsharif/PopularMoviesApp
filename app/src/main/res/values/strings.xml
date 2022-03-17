@@ -9,4 +9,13 @@
     <string name="action_top_rated">Top rated</string>
     <string name="action_now_playing">Now plaing</string>
     <string name="search">Search</string>
+    <string name="movie_backdrop_content_description">Content</string>
+    <string name="language">Language</string>
+    <string name="release_date">Release date</string>
+    <string name="label_overview">Overview</string>
+    <string name="cast">Cast</string>
+    <string name="trailers">trailers</string>
+    <string name="user_reviews">User Reviews</string>
+
+    <string name="review_author_image">Review author image</string>
 </resources>

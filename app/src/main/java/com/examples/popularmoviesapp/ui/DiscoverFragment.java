@@ -1,7 +1,12 @@
 package com.examples.popularmoviesapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -25,6 +30,7 @@ import com.examples.popularmoviesapp.model.Movie;
 import com.examples.popularmoviesapp.model.MovieResponse;
 import com.examples.popularmoviesapp.viewmodels.MovieViewModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +38,7 @@ import java.util.List;
 public class DiscoverFragment extends Fragment implements MoviesListener {
     MovieViewModel viewModel;
     FragmentDiscoverBinding binding;
+
     MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(), DiscoverFragment.this);
 
     public DiscoverFragment() {
@@ -140,6 +147,11 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
 
     @Override
     public void OnClickItemRec(int position) {
+       Movie movie = adapter.getItem(position);
+       Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
+       intent.putExtra("movieItem",movie);
+
+        startActivity(intent);
 
     }
 }

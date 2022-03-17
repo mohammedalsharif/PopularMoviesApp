@@ -2,6 +2,7 @@ package com.examples.popularmoviesapp.data.api;
 
 import com.examples.popularmoviesapp.model.Movie;
 import com.examples.popularmoviesapp.model.MovieResponse;
+import com.examples.popularmoviesapp.model.ReviewsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -25,5 +26,8 @@ public interface GetDataInterface {
 
     @GET("movie/{movie_id}?")
     Call<MovieResponse> getSearchById(@Path("movie_id") int movieId,@Query("api_key") String apiKey);
+
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewsResponse> getReviews(@Path("movie_id") int id ,@Query("api_key") String apiKye );
 
 }

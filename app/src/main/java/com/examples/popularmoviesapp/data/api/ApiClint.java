@@ -1,10 +1,13 @@
 package com.examples.popularmoviesapp.data.api;
 
 import com.examples.popularmoviesapp.model.MovieResponse;
+import com.examples.popularmoviesapp.model.ReviewsResponse;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class ApiClint {
     // private static final String baseUrl = "https://api.themoviedb.org/3/movie/";
@@ -40,6 +43,10 @@ public class ApiClint {
 
     public Call<MovieResponse> getSearchMovieList(String apiKey, String query, int page) {
         return dataInterface.getSearchMovieList(apiKey, query, page);
+    }
+
+   public Call<ReviewsResponse> getReviews( int id,String apiKye) {
+        return dataInterface.getReviews(id,apiKye);
     }
 
 
