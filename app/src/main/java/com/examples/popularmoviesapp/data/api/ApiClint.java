@@ -1,7 +1,9 @@
 package com.examples.popularmoviesapp.data.api;
 
+import com.examples.popularmoviesapp.model.CreditsResponse;
 import com.examples.popularmoviesapp.model.MovieResponse;
 import com.examples.popularmoviesapp.model.ReviewsResponse;
+import com.examples.popularmoviesapp.model.VideosResponse;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -47,6 +49,18 @@ public class ApiClint {
 
    public Call<ReviewsResponse> getReviews( int id,String apiKye) {
         return dataInterface.getReviews(id,apiKye);
+    }
+
+   public Call<CreditsResponse> getCredits(int movieId,String apiKye) {
+        return dataInterface.getCredits(movieId,apiKye);
+    }
+
+    public Call<MovieResponse> getSearchById(int movieId, String apiKey) {
+        return dataInterface.getSearchById(movieId,apiKey);
+    }
+
+    public Call<VideosResponse> getVideos(int movieId, String apiKye) {
+        return dataInterface.getVideos(movieId,apiKye);
     }
 
 

@@ -44,7 +44,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
         Movie movie = movies.get(position);
         holder.binding.tvNameMovieItem.setText(movie.getTitle());
         holder.binding.tvReleaseDate.setText(movie.getReleaseDate());
-        holder.binding.tvLanguage.setText(movie.getOriginalLanguage());
+        holder.binding.tvLanguage.setText("Language : "+movie.getOriginalLanguage());
         holder.binding.tvPop.setText(String.valueOf(movie.getVoteAverage()));
         holder.binding.progressBar.setProgress((int) (movie.getVoteAverage() * 10));
 

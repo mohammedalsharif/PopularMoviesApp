@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.examples.popularmoviesapp.Utils.AppExecutor;
 import com.examples.popularmoviesapp.data.api.ApiClint;
+import com.examples.popularmoviesapp.model.CreditsResponse;
 import com.examples.popularmoviesapp.model.Movie;
 import com.examples.popularmoviesapp.model.MovieResponse;
 import com.examples.popularmoviesapp.model.ReviewsResponse;
+import com.examples.popularmoviesapp.model.VideosResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,10 +24,14 @@ import java.util.concurrent.TimeUnit;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class MovieViewModel extends ViewModel {
 
     public MutableLiveData<ReviewsResponse> mDataReview = new MutableLiveData<>();
+    public MutableLiveData<CreditsResponse> mDataCredits = new MutableLiveData<>();
+    public MutableLiveData<VideosResponse> mDataVideos = new MutableLiveData<>();
     public MutableLiveData<MovieResponse> mutableLiveData = new MutableLiveData<>();
     public MutableLiveData<List<Movie>> mutableLiveMovieData = new MutableLiveData<>();
 
@@ -175,6 +181,48 @@ public class MovieViewModel extends ViewModel {
              @Override
              public void onFailure(Call<ReviewsResponse> call, Throwable t) {
                  Log.e("TAG", "onFailure: "+t.getMessage() );
+             }
+         });
+    }
+
+    public void getCredits(int movieId) {
+        apiClint.getCredits(movieId,apiKey).enqueue(new Callback<CreditsResponse>() {
+            @Override
+            public void onResponse(Call<CreditsResponse> call, Response<CreditsResponse> response) {
+                mDataCredits.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<CreditsResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+   public void getSearchById(int movieId){
+        apiClint.getSearchById(movieId,apiKey).enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                mutableLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getVideos(int movieId) {
+         apiClint.getVideos(movieId,apiKey).enqueue(new Callback<VideosResponse>() {
+             @Override
+             public void onResponse(Call<VideosResponse> call, Response<VideosResponse> response) {
+                 mDataVideos.setValue(response.body());
+             }
+
+             @Override
+             public void onFailure(Call<VideosResponse> call, Throwable t) {
+
              }
          });
     }

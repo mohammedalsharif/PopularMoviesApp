@@ -46,7 +46,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +184,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/label_overview"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_divider_bottom" />
 
@@ -211,9 +210,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/cast"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_overview" />
-    <!--        app:visibleGone="@{movieDetails.castList.size > 0}" />-->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_cast"
@@ -225,8 +225,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_cast" />
-    <!--    app:items="@{movieDetails.castList}"-->
-    <!--    app:visibleGone="@{movieDetails.castList.size > 0}"-->
+
     <TextView
         android:id="@+id/label_trailers"
         android:layout_width="wrap_content"
@@ -234,9 +233,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/trailers"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_cast" />
-    <!--    app:visibleGone="@{movieDetails.trailers.size > 0}"-->
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_trailers"
         android:layout_width="0dp"
@@ -249,8 +250,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_trailers" />
 
-    <!--    app:visibleGone="@{movieDetails.trailers.size > 0}"-->
-    <!--    app:items="@{movieDetails.trailers}"-->
+
     <TextView
         android:id="@+id/label_reviews"
         android:layout_width="wrap_content"
@@ -258,9 +258,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="@string/user_reviews"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_trailers" />
-    <!--    app:visibleGone="@{movieDetails.reviews.size > 0}"-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_reviews"
         android:layout_width="0dp"
@@ -268,10 +269,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clipChildren="false"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_reviews" />
-    <!--    app:items="@{movieDetails.reviews}"-->
-    <!--    app:visibleGone="@{movieDetails.reviews.size > 0}"-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

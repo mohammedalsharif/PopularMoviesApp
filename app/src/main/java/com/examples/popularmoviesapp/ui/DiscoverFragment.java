@@ -3,10 +3,6 @@ package com.examples.popularmoviesapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -30,7 +26,6 @@ import com.examples.popularmoviesapp.model.Movie;
 import com.examples.popularmoviesapp.model.MovieResponse;
 import com.examples.popularmoviesapp.viewmodels.MovieViewModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,16 +51,21 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentDiscoverBinding.inflate(getLayoutInflater());
-        binding.spinKit.setVisibility(View.VISIBLE);
-
         viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-
         PopularMovie();
+        handleRecMovies();
+        return binding.getRoot();
+    }
 
+    private void handleRecMovies() {
         binding.recyclerViewDiscover.setAdapter(adapter);
         binding.recyclerViewDiscover.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerViewDiscover.setHasFixedSize(true);
-
+        if (adapter.getItemCount()==0){
+            binding.spinKit.setVisibility(View.VISIBLE);
+        }else {
+            binding.spinKit.setVisibility(View.GONE);
+        }
         binding.recyclerViewDiscover.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -74,8 +74,6 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
                 }
             }
         });
-
-        return binding.getRoot();
     }
 
     private void PopularMovie() {
@@ -150,7 +148,6 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
        Movie movie = adapter.getItem(position);
        Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
        intent.putExtra("movieItem",movie);
-
         startActivity(intent);
 
     }

@@ -13,9 +13,12 @@
     <string name="language">Language</string>
     <string name="release_date">Release date</string>
     <string name="label_overview">Overview</string>
-    <string name="cast">Cast</string>
+    <string name="cast">The Cast</string>
     <string name="trailers">trailers</string>
     <string name="user_reviews">User Reviews</string>
 
     <string name="review_author_image">Review author image</string>
+    <string name="play_icon">play</string>
+    <string name="trailer_thumbnail">TrailerThumbnail</string>
+    <string name="share">share</string>
 </resources>

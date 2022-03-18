@@ -59,6 +59,9 @@ dependencies {
    // MaterialRatingBar
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 
+    //SpinKit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+   // CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

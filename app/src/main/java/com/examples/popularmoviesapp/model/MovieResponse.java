@@ -1,24 +1,38 @@
 package com.examples.popularmoviesapp.model;
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class MovieResponse {
     @SerializedName("page")
-    Integer page;
+    private Integer page;
 
     @SerializedName("results")
-    List<Movie> movieList = null;
+    private List<Movie> movieList = null;
 
     @SerializedName("total_results")
-    Integer totalResult;
+    private Integer totalResult;
 
     @SerializedName("total_pages")
-    Integer totalPages;
+    private Integer totalPages;
+
+
+    @SerializedName("genres")
+    @Expose
+    List<Genre> genreList;
 
     public MovieResponse() {
+    }
+
+    public List<Genre> getGenreList() {
+        return genreList;
+    }
+
+    public void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
     }
 
     public Integer getPage() {
@@ -52,4 +66,6 @@ public class MovieResponse {
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
     }
+
+
 }
