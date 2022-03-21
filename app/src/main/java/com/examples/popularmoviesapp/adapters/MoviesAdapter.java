@@ -1,5 +1,6 @@
 package com.examples.popularmoviesapp.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.databinding.CustomItemSearchRecBinding;
 import com.examples.popularmoviesapp.model.Movie;
 import com.squareup.picasso.Callback;
@@ -18,7 +20,7 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovies> {
     List<Movie> movies = new ArrayList<>();
     MoviesListener listener;
-    //Context context;
+   Context context;
 
     public MoviesAdapter(List<Movie> movies, MoviesListener listener) {
         this.movies = movies;
@@ -35,6 +37,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
     @NonNull
     @Override
     public HolderMovies onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context=parent.getContext();
         CustomItemSearchRecBinding binding = CustomItemSearchRecBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new HolderMovies(binding);
     }
@@ -44,7 +47,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.HolderMovi
         Movie movie = movies.get(position);
         holder.binding.tvNameMovieItem.setText(movie.getTitle());
         holder.binding.tvReleaseDate.setText(movie.getReleaseDate());
-        holder.binding.tvLanguage.setText("Language : "+movie.getOriginalLanguage());
+
+        holder.binding.tvLanguage.setText(context.getString(R.string.language2) +movie.getOriginalLanguage());
         holder.binding.tvPop.setText(String.valueOf(movie.getVoteAverage()));
         holder.binding.progressBar.setProgress((int) (movie.getVoteAverage() * 10));
 

@@ -45,8 +45,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mModel = new ViewModelProvider(this).get(MovieViewModel.class);
 
-
         Intent result = getIntent();
+
         if (result != null) {
             movie = (Movie) result.getSerializableExtra("movieItem");
 

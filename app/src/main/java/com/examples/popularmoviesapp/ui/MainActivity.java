@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(),discoverFragment,R.id.main_container);
         iniBottomNav();
     }

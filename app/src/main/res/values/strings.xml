@@ -16,6 +16,7 @@
     <string name="cast">The Cast</string>
     <string name="trailers">trailers</string>
     <string name="user_reviews">User Reviews</string>
+    <string name="language2">Language : </string>
 
     <string name="review_author_image">Review author image</string>
     <string name="play_icon">play</string>
