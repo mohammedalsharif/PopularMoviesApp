@@ -30,7 +30,7 @@
             android:id="@+id/tv_nameMovie_item"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="@color/tv_movie_item_bgColor"
+            android:background="@color/color_item_serch_bg"
             android:gravity="center"
             android:maxLines="1"
             android:textSize="16sp"

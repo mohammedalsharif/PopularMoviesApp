@@ -3,12 +3,19 @@ package com.examples.popularmoviesapp.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.examples.popularmoviesapp.R;
+import com.examples.popularmoviesapp.adapters.FavoriteAdapter;
+import com.examples.popularmoviesapp.databinding.FragmentFavortisBinding;
+import com.examples.popularmoviesapp.model.FavoriteMovie;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +65,26 @@ public class FavoritesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favortis, container, false);
+        FragmentFavortisBinding binding =FragmentFavortisBinding.inflate(getLayoutInflater());
+        List<FavoriteMovie>listFav=new ArrayList<>();
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        listFav.add(new FavoriteMovie("Mohammed"));
+        FavoriteAdapter adapter =new FavoriteAdapter(listFav);
+        binding.recFavorite.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        binding.recFavorite.setHasFixedSize(true);
+        binding.recFavorite.setAdapter(adapter);
+
+
+
+
+        return binding.getRoot();
     }
 }
