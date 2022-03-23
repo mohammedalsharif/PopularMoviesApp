@@ -9,14 +9,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.examples.popularmoviesapp.databinding.CustomeItemRecFavoritesBinding;
 import com.examples.popularmoviesapp.model.FavoriteMovie;
+import com.examples.popularmoviesapp.model.Movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavViewHolder> {
 
-    List<FavoriteMovie> favoriteMovieList;
+    List<Movie> favoriteMovieList = new ArrayList<>();
 
-    public FavoriteAdapter(List<FavoriteMovie> favoriteMovieList) {
+    public FavoriteAdapter(List<Movie> favoriteMovieList) {
+        this.favoriteMovieList = favoriteMovieList;
+    }
+
+    public void setFavoriteMovieList(List<Movie> favoriteMovieList) {
         this.favoriteMovieList = favoriteMovieList;
     }
 
@@ -31,9 +37,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavVie
 
     @Override
     public void onBindViewHolder(@NonNull FavViewHolder holder, int position) {
-        FavoriteMovie favoriteMovie = favoriteMovieList.get(position);
-        holder.binding.tvNameMovieItem.setText(favoriteMovie.getName());
-
+        Movie favoriteMovie = favoriteMovieList.get(position);
+        holder.binding.tvNameMovieItem.setText(favoriteMovie.getTitle());
     }
 
     @Override

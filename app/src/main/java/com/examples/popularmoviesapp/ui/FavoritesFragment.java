@@ -3,6 +3,8 @@ package com.examples.popularmoviesapp.ui;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
@@ -11,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.adapters.FavoriteAdapter;
+import com.examples.popularmoviesapp.data.database.DataViewModel;
 import com.examples.popularmoviesapp.databinding.FragmentFavortisBinding;
 import com.examples.popularmoviesapp.model.FavoriteMovie;
+import com.examples.popularmoviesapp.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FavoritesFragment extends Fragment {
-
+    DataViewModel dataViewModel;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,22 +71,19 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FragmentFavortisBinding binding =FragmentFavortisBinding.inflate(getLayoutInflater());
-        List<FavoriteMovie>listFav=new ArrayList<>();
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        listFav.add(new FavoriteMovie("Mohammed"));
-        FavoriteAdapter adapter =new FavoriteAdapter(listFav);
-        binding.recFavorite.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        FragmentFavortisBinding binding = FragmentFavortisBinding.inflate(getLayoutInflater());
+        dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
+        FavoriteAdapter adapter = new FavoriteAdapter(new ArrayList<>());
+        dataViewModel.getAllFavoriteMovies().observe(getActivity(), new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+
+                adapter.setFavoriteMovieList(movies);
+            }
+        });
+        binding.recFavorite.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         binding.recFavorite.setHasFixedSize(true);
         binding.recFavorite.setAdapter(adapter);
-
-
 
 
         return binding.getRoot();

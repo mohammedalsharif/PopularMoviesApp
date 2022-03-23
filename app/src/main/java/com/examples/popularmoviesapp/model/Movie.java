@@ -1,33 +1,48 @@
 package com.examples.popularmoviesapp.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Entity(tableName = "Movie")
 public class Movie implements Serializable {
 
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    @Ignore
     @SerializedName("adult")
     @Expose
-  private Boolean adult;
+    private Boolean adult;
 
+    @ColumnInfo(name = "backdrop_path")
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
 
+
+    @Ignore
     @SerializedName("genre_ids")
     @Expose
-    private  List<Integer> genreIds;
+    private List<Integer> genreIds;
 
-    @SerializedName("id")
-    @Expose
-    private  Integer id;
 
+    @Ignore
     @SerializedName("original_language")
     @Expose
-    private  String originalLanguage;
+    private String originalLanguage;
 
+    @Ignore
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
@@ -38,33 +53,47 @@ public class Movie implements Serializable {
 
     @SerializedName("popularity")
     @Expose
-    private  Double popularity;
+    private Double popularity;
 
+    @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
     @Expose
-    private  String posterPath;
+    private String posterPath;
 
     @SerializedName("release_date")
     @Expose
-    private  String releaseDate;
+    private String releaseDate;
 
+    @ColumnInfo(name = "title")
     @SerializedName("title")
     @Expose
-    private  String title;
+    private String title;
 
     @SerializedName("video")
     @Expose
-    private  Boolean video;
+    private Boolean video;
 
+   @ColumnInfo(name = "vote_average")
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
 
+   @ColumnInfo(name = "is_favorite")
+   private Integer IsFavorite ;
+
     @SerializedName("vote_count")
     @Expose
-    private  Integer voteCount;
+    private Integer voteCount;
 
     public Movie() {
+    }
+
+    public Integer getIsFavorite() {
+        return IsFavorite;
+    }
+
+    public void setIsFavorite(Integer isFavorite) {
+        IsFavorite = isFavorite;
     }
 
     public Boolean getAdult() {
@@ -76,7 +105,7 @@ public class Movie implements Serializable {
     }
 
     public String getBackdropPath() {
-        return "https://image.tmdb.org/t/p/w500"+backdropPath;
+        return "https://image.tmdb.org/t/p/w500" + backdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {
@@ -132,7 +161,7 @@ public class Movie implements Serializable {
     }
 
     public String getPosterPath() {
-        return"https://image.tmdb.org/t/p/w500"+posterPath;
+        return "https://image.tmdb.org/t/p/w500" + posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -140,7 +169,7 @@ public class Movie implements Serializable {
     }
 
     public String getReleaseDate() {
-      return   releaseDate;
+        return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
