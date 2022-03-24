@@ -3,7 +3,6 @@ package com.examples.popularmoviesapp.data.database;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Query;
 
 import com.examples.popularmoviesapp.model.Movie;
 
@@ -18,7 +17,7 @@ public class Repository {
         movieDAO = database.movieDAO();
     }
 
-   public void insertMovie(Movie movie) {
+    public void insertMovie(Movie movie) {
         MovieRoomDatabase.EXECUTOR_SERVICE.execute(new Runnable() {
             @Override
             public void run() {
@@ -28,22 +27,31 @@ public class Repository {
 
     }
 
-   public LiveData<List<Movie>> getAllFavoriteMovies() {
+   public void deleteMovie(Movie movie) {
+        MovieRoomDatabase.EXECUTOR_SERVICE.execute(new Runnable() {
+            @Override
+            public void run() {
+                movieDAO.deleteMovie(movie);
+            }
+        });
+    }
+
+    public LiveData<List<Movie>> getAllFavoriteMovies() {
         return movieDAO.getAllFavoriteMovies();
     }
 
 
-   public void setFavoriteMovie(int movieId) {
-     MovieRoomDatabase.EXECUTOR_SERVICE.execute(new Runnable() {
-         @Override
-         public void run() {
-             movieDAO.setFavoriteMovie(movieId);
-         }
-     });
+    public void setFavoriteMovie(int movieId) {
+        MovieRoomDatabase.EXECUTOR_SERVICE.execute(new Runnable() {
+            @Override
+            public void run() {
+                movieDAO.setFavoriteMovie(movieId);
+            }
+        });
     }
 
 
-   public void UnFavoriteMovie(int movieId) {
+    public void UnFavoriteMovie(int movieId) {
         MovieRoomDatabase.EXECUTOR_SERVICE.execute(new Runnable() {
             @Override
             public void run() {
@@ -51,6 +59,10 @@ public class Repository {
             }
         });
 
+    }
+
+    public LiveData<Integer> IsFavorite(int movieId) {
+       return movieDAO.IsFavorite(movieId);
     }
 
 }

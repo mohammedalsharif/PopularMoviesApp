@@ -10,12 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.examples.popularmoviesapp.R;
+import com.examples.popularmoviesapp.Utils.ActivityUtils;
 import com.examples.popularmoviesapp.adapters.CastAdapter;
 import com.examples.popularmoviesapp.adapters.ReviewsAdapter;
 import com.examples.popularmoviesapp.adapters.TrailerAdapter;
@@ -32,7 +37,10 @@ import com.examples.popularmoviesapp.viewmodels.MovieViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.chip.Chip;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     MovieViewModel mModel;
     DataViewModel DViewModel;
     Movie movie;
-
+int fav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +63,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if (result != null) {
             movie = (Movie) result.getSerializableExtra("movieItem");
             Picasso.get().load(movie.getPosterPath()).fit().into(binding.movieDetailsInfo.imagePoster);
+            setBitmapImageInMovie();
             Picasso.get().load(movie.getBackdropPath()).fit().into(binding.imageMovieBackdrop);
             binding.movieDetailsInfo.textTitle.setText(movie.getTitle());
             binding.movieDetailsInfo.textVote.setText(String.valueOf(movie.getVoteAverage()));
@@ -79,16 +88,44 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void setBitmapImageInMovie() {
+        Picasso.get().load(movie.getPosterPath()).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                movie.setImageByte(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+
+
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_details, menu);
         MenuItem item = menu.findItem(R.id.action_fav_details);
-        if (movie.getIsFavorite()!=null) {
-            item.setIcon(R.drawable.ic_favorite_black_24dp);
-        }else {
-            item.setIcon(R.drawable.ic_favorite_border_black_24dp);
-        }
-        invalidateOptionsMenu();
+        DViewModel.IsFavorite(movie.getId()).observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer!=null){
+                    fav=integer;
+                if (integer==1) {
+                    item.setIcon(R.drawable.ic_favorite_black_24dp).setTitle("fav");
+                }else {
+                    item.setIcon(R.drawable.ic_favorite_border_black_24dp).setTitle("unFav");
+                }
+            }}
+        });
+
         return true;
     }
 
@@ -96,9 +133,17 @@ public class MovieDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_fav_details:
-                DViewModel.insertMovie(movie);
-                DViewModel.setFavoriteMovie(movie.getId());
+                if (fav==0){
 
+                    DViewModel.insertMovie(movie);
+                    DViewModel.setFavoriteMovie(movie.getId());
+                    fav=1;
+                }else{
+                    DViewModel.UnFavoriteMovie(movie.getId());
+                    DViewModel.deleteMovie(movie);
+                    fav=0;
+                }
+                invalidateOptionsMenu();
                 return true;
 
         }
@@ -111,7 +156,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             handleToolbarTitle();
-
         }
 
     }

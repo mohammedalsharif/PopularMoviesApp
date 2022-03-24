@@ -3,6 +3,7 @@ package com.examples.popularmoviesapp.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,6 +11,11 @@ import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.Utils.ActivityUtils;
 import com.examples.popularmoviesapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
+
+import coil.ImageLoader;
+import coil.ImageLoaders;
+import coil.request.ImageRequest;
+import coil.request.ImageResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityUtils.replaceFragmentInActivity(getSupportFragmentManager(),discoverFragment,R.id.main_container);
         iniBottomNav();
+
     }
 
     private void iniBottomNav() {

@@ -37,4 +37,13 @@ public class DataViewModel extends AndroidViewModel {
         repository.UnFavoriteMovie(movieId);
     }
 
+    public LiveData<Integer> IsFavorite(int movieId) {
+        return repository.IsFavorite(movieId);
+    }
+
+    public void deleteMovie(Movie movie) {
+        repository.deleteMovie(movie);
+    }
+
+
 }

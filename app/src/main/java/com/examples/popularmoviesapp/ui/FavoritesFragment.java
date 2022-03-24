@@ -7,9 +7,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.adapters.FavoriteAdapter;
@@ -71,13 +73,12 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        FavoriteAdapter adapter = new FavoriteAdapter();
         FragmentFavortisBinding binding = FragmentFavortisBinding.inflate(getLayoutInflater());
         dataViewModel = new ViewModelProvider(this).get(DataViewModel.class);
-        FavoriteAdapter adapter = new FavoriteAdapter(new ArrayList<>());
         dataViewModel.getAllFavoriteMovies().observe(getActivity(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-
                 adapter.setFavoriteMovieList(movies);
             }
         });

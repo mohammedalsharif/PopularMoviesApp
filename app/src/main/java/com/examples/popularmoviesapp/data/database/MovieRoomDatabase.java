@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.examples.popularmoviesapp.model.Movie;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Movie.class},version = 1,exportSchema = false)
+@TypeConverters(Converters.class)
 public abstract class MovieRoomDatabase extends RoomDatabase {
 
     private static final String NAME_DB = "Movie_Database";

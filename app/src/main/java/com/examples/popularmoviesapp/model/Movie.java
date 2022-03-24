@@ -1,10 +1,16 @@
 package com.examples.popularmoviesapp.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.examples.popularmoviesapp.data.database.Converters;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,6 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "Movie")
+@TypeConverters(Converters.class)
 public class Movie implements Serializable {
 
     @PrimaryKey
@@ -47,9 +54,11 @@ public class Movie implements Serializable {
     @Expose
     private String originalTitle;
 
+    @ColumnInfo(name = "overview")
     @SerializedName("overview")
     @Expose
     private String overview;
+
 
     @SerializedName("popularity")
     @Expose
@@ -69,6 +78,7 @@ public class Movie implements Serializable {
     @Expose
     private String title;
 
+    @Ignore
     @SerializedName("video")
     @Expose
     private Boolean video;
@@ -79,13 +89,26 @@ public class Movie implements Serializable {
     private Double voteAverage;
 
    @ColumnInfo(name = "is_favorite")
-   private Integer IsFavorite ;
+   private Integer IsFavorite=0 ;
 
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
 
+
+    @ColumnInfo(name="byteImage")
+    private Bitmap imageByte;
+
+
     public Movie() {
+    }
+
+    public Bitmap getImageByte() {
+        return imageByte;
+    }
+
+    public void setImageByte(Bitmap imageByte) {
+        this.imageByte = imageByte;
     }
 
     public Integer getIsFavorite() {
