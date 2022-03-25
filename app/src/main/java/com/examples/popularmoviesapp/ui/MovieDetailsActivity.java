@@ -49,7 +49,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     MovieViewModel mModel;
     DataViewModel DViewModel;
     Movie movie;
-int fav;
+    private int fav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ int fav;
         Intent result = getIntent();
 
         if (result != null) {
-            movie = (Movie) result.getSerializableExtra("movieItem");
+            movie = (Movie) result.getSerializableExtra(DiscoverFragment.MOVIE_KEY);
             Picasso.get().load(movie.getPosterPath()).fit().into(binding.movieDetailsInfo.imagePoster);
             setBitmapImageInMovie();
             Picasso.get().load(movie.getBackdropPath()).fit().into(binding.imageMovieBackdrop);
@@ -116,14 +117,15 @@ int fav;
         DViewModel.IsFavorite(movie.getId()).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                if (integer!=null){
-                    fav=integer;
-                if (integer==1) {
-                    item.setIcon(R.drawable.ic_favorite_black_24dp).setTitle("fav");
-                }else {
-                    item.setIcon(R.drawable.ic_favorite_border_black_24dp).setTitle("unFav");
+                if (integer != null) {
+                    fav = integer;
+                    if (integer == 1) {
+                        item.setIcon(R.drawable.ic_favorite_black_24dp).setTitle("fav");
+                    } else {
+                        item.setIcon(R.drawable.ic_favorite_border_black_24dp).setTitle("unFav");
+                    }
                 }
-            }}
+            }
         });
 
         return true;
@@ -133,15 +135,15 @@ int fav;
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_fav_details:
-                if (fav==0){
+                if (fav == 0) {
 
                     DViewModel.insertMovie(movie);
                     DViewModel.setFavoriteMovie(movie.getId());
-                    fav=1;
-                }else{
+                    fav = 1;
+                } else {
                     DViewModel.UnFavoriteMovie(movie.getId());
                     DViewModel.deleteMovie(movie);
-                    fav=0;
+                    fav = 0;
                 }
                 invalidateOptionsMenu();
                 return true;

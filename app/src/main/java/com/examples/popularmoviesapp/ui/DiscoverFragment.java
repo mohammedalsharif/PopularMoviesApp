@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toolbar;
 
 import com.examples.popularmoviesapp.R;
 import com.examples.popularmoviesapp.adapters.MoviesAdapter;
@@ -31,9 +32,10 @@ import java.util.List;
 
 
 public class DiscoverFragment extends Fragment implements MoviesListener {
+    public static final String MOVIE_KEY = "movieItem";
     MovieViewModel viewModel;
     FragmentDiscoverBinding binding;
-
+    Toolbar toolbar;
     MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(), DiscoverFragment.this);
 
     public DiscoverFragment() {
@@ -44,7 +46,6 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -61,9 +62,9 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
         binding.recyclerViewDiscover.setAdapter(adapter);
         binding.recyclerViewDiscover.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recyclerViewDiscover.setHasFixedSize(true);
-        if (adapter.getItemCount()==0){
+        if (adapter.getItemCount() == 0) {
             binding.spinKit.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             binding.spinKit.setVisibility(View.GONE);
         }
         binding.recyclerViewDiscover.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -145,9 +146,9 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
 
     @Override
     public void OnClickItemRec(int position) {
-       Movie movie = adapter.getItem(position);
-       Intent intent =new Intent(getActivity(), MovieDetailsActivity.class);
-       intent.putExtra("movieItem",movie);
+        Movie movie = adapter.getItem(position);
+        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
+        intent.putExtra(MOVIE_KEY, movie);
         startActivity(intent);
 
     }
