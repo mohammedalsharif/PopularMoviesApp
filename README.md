@@ -1,8 +1,18 @@
-![Screen](https://github.com/mohammedalsharif/PopularMoviesApp/blob/master/mockup/Mockup.jpg)
 <h1 align="center">Popular Movies Stage 1 + Stage 2</h1>
 <h4 align="center">
 	Discover the most popular and top rated movies playing. Movies data fetched using <a href="https://www.themoviedb.org/">themoviedb.org</a> API.
 </h4>
+![Screen](https://github.com/mohammedalsharif/PopularMoviesApp/blob/master/mockup/Mockup.jpg)
+
+## 🌟 Features
+*   Discover the most popular and the most rated movies
+*   User can view and play trailers on youtube 
+*   Shows a list of reviews for each movie
+*   Users can mark a movie as favorite in the details view by tapping a heart icon 
+*   Users can share movie trailers with their network
+*   Advanced uses of Room
+*   MVVM with Android Architecture Components(Room, LiveData, ViewModel)
+*   Material design
 
 ## 📃 Libraries used
 
