@@ -12,10 +12,7 @@ import com.examples.popularmoviesapp.Utils.ActivityUtils;
 import com.examples.popularmoviesapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-import coil.ImageLoader;
-import coil.ImageLoaders;
-import coil.request.ImageRequest;
-import coil.request.ImageResult;
+
 
 public class MainActivity extends AppCompatActivity {
 

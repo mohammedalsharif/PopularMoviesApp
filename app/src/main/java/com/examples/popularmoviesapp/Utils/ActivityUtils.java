@@ -15,16 +15,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import coil.Coil;
-import coil.ComponentRegistry;
-import coil.ImageLoader;
-import coil.disk.DiskCache;
-import coil.memory.MemoryCache;
-import coil.request.DefaultRequestOptions;
-import coil.request.Disposable;
-import coil.request.ImageRequest;
-import coil.request.ImageResult;
-import kotlin.coroutines.Continuation;
+
 import retrofit2.http.Url;
 
 public class ActivityUtils {

@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ShareCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -147,10 +150,29 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 }
                 invalidateOptionsMenu();
                 return true;
+            case R.id.action_share_details: {
+
+                Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                        .setType("text/plain")
+                        .setSubject(movie.getTitle() + " movie trailer")
+                        .setText("Check out " + movie.getTitle())
+                        .createChooserIntent();
+
+
+                int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+                if (Build.VERSION.SDK_INT >= 21)
+                    flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+
+                shareIntent.addFlags(flags);
+                if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(shareIntent);
+                }
+                return true;
 
         }
+            default:
         return super.onOptionsItemSelected(item);
-    }
+    }}
 
     private void setupToolbar() {
         Toolbar toolbar = binding.toolbar;
