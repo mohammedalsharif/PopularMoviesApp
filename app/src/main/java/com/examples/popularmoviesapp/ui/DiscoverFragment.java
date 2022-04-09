@@ -1,6 +1,8 @@
 package com.examples.popularmoviesapp.ui;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.examples.popularmoviesapp.R;
+import com.examples.popularmoviesapp.Utils.CheckedIsOnline;
+import com.examples.popularmoviesapp.Utils.InternetCheckReceiver;
 import com.examples.popularmoviesapp.adapters.MoviesAdapter;
 import com.examples.popularmoviesapp.adapters.MoviesListener;
 import com.examples.popularmoviesapp.databinding.FragmentDiscoverBinding;
@@ -29,13 +34,14 @@ import com.examples.popularmoviesapp.viewmodels.MovieViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DiscoverFragment extends Fragment implements MoviesListener {
     public static final String MOVIE_KEY = "movieItem";
     MovieViewModel viewModel;
     FragmentDiscoverBinding binding;
-    Toolbar toolbar;
+    private InternetCheckReceiver receiver;
     MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>(), DiscoverFragment.this);
 
     public DiscoverFragment() {
@@ -53,9 +59,34 @@ public class DiscoverFragment extends Fragment implements MoviesListener {
         // Inflate the layout for this fragment
         binding = FragmentDiscoverBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this).get(MovieViewModel.class);
-        PopularMovie();
-        handleRecMovies();
+        receiver = new InternetCheckReceiver(new CheckedIsOnline() {
+            @Override
+            public void IsOnLine(boolean online) {
+                if (online) {
+                    Toast.makeText(getActivity(), "Internet Connected", Toast.LENGTH_SHORT).show();
+                    binding.spinKit.setVisibility(View.VISIBLE);
+                    PopularMovie();
+                    handleRecMovies();
+                    binding.recyclerViewDiscover.setVisibility(View.VISIBLE);
+                    binding.imNoInternet.setVisibility(View.GONE);
+                }else {
+                    binding.imNoInternet.setVisibility(View.VISIBLE);
+                    binding.spinKit.setVisibility(View.INVISIBLE);
+                    binding.recyclerViewDiscover.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getActivity(), "Internet Disconnected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        requireActivity().registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
         return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       requireActivity().unregisterReceiver(receiver);
+
     }
 
     private void handleRecMovies() {

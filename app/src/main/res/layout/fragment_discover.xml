@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.DiscoverFragment">
 
+    <ImageView
+        android:id="@+id/imNoInternet"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/nointernet"
+        android:visibility="gone">
+
+    </ImageView>
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_discover"
@@ -15,16 +24,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         style="@style/SpinKitView.Large.FadingCircle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:layout_gravity="center"
+        android:visibility="gone"
         app:SpinKit_Color="@color/colorAccent" />
-
 
 
 </FrameLayout>
